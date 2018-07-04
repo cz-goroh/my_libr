@@ -1,8 +1,10 @@
 <?php
 
 if(isset($_POST['zaj_stek'])){
-    $rad_stak_arr=$post;
-    
+    unset($post['zaj_stek']);
+    $rad_stack_arr=$post;
+    $_SESSION['rad_stack_arr']=$rad_stack_arr;
+    header('Location: /cabinet/clientrcab/planstack');
 }
 
 if(isset($_POST['change_pass'])){
@@ -113,7 +115,8 @@ if(isset($_POST['bid'])){
             $dlit= Dbq::AtomSel('dlit', 'rolik', 'id', $rolik_id);
             $pr= Dbq::AtomSel('price', 'struct', 'id', $bid_k);
             $price=($pr/30)*$dlit;
-            $_SESSION['snt']='Ваши заявки успешно отправлены менеджерам радиостанций';
+            $_SESSION['snt']='Ваша заявка успешно отправлена менеджеру радиостанции, '
+                    . 'для отслеживания статуса откройте соответствующий медиаплан';
         $bidq="INSERT INTO bid ("
     ."`radio_id`,`rekl_id`,`struct_id`,`ins_time`,`b_time`,`status`,`rolik_id`,"
                 . "`sum`) VALUES ('$radio_id','$id','$bid_k',$t,$ts,'rec',"
@@ -121,7 +124,7 @@ if(isset($_POST['bid'])){
         Dbq::InsDb($bidq);
         }
     }
-    header('Location: /cabinet/clientrcab/6');
+    header('Location: /cabinet/clientrcab/3');
 }
 if(isset($_POST['profile_ch'])&&($_POST['profile_ch']===$id)){
     $name=$post['name'];
