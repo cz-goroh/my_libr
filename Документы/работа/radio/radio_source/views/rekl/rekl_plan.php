@@ -10,6 +10,7 @@ ob_start();
     // для селекта с роликами
 ob_end_clean();
 ?>
+    <a href="/cabinet/clientrcab/3">К списку радиостанций</a>
     <br>
         <form action="#" method="post">
             Период планирования
