@@ -19,11 +19,7 @@
 <div id="d-6"> 
 
     <h1>Мои заявки</h1>
-    <?php if(!empty($_SESSION['snt'])): ?>
-    <div > 
-       <?php echo $_SESSION['snt']; unset($_SESSION['snt']); ?>
-    </div>
-      <?php  endif; ?>
+    
 <?php foreach ($sat_inf as $s_i=>$s_inf):  
      //print_r($s_inf);     echo '<br>';
     if(!empty($my_bidarr[$s_i])): ?>
@@ -81,8 +77,7 @@
            target="_blank"a>Скачать</a>
         <?php if($shc['status']==='bill'): ?>
             <?php if(!file_exists($file_way)): ?>
-        <form method="post" action="/cabinet/reclch/"
-              enctype="multipart/form-data" >
+        <form method="post" action="/cabinet/reclch/" enctype="multipart/form-data" >
             
             Загрузить платёжный документ(pdf)
             <input type="file" name="plat_<?php echo $shc['id']; ?>" />
@@ -171,16 +166,24 @@ foreach ($rolar as $rolkey=>$rolinf):
 </form></div>
 <div id="d-3" >
     <h1>Радиостанции</h1>
+    <?php if(!empty($_SESSION['snt'])): ?>
+    <div > 
+       <?php echo $_SESSION['snt']; unset($_SESSION['snt']); ?>
+    </div>
+      <?php  endif; ?>
     <form method="post" action="#" >
         <input type="search" name="tag" placeholder="Аудитория" >
         <button name="tags" value="t" type="submit" >Искать</button>
     </form>
-<?php
-if(isset($_POST['tags'])): echo 'Выборка по запросу '.$post['tag']; endif;?>
-    <h1>Отметьте галочкой станции, на которых планируете разместить рекламу</h1>
+
+    <!--<h1>Отметьте галочкой станции, на которых планируете разместить рекламу</h1>-->
     <form method="post" action="/cabinet/reclch">
 <?php
 //include ROOT.'/views/rekl/rekl_plan.php'; //вставка плана-заявки
+if(!empty($sat_inf)): 
+     if(isset($_POST['tags'])): echo 'Выборка по запросу '.$post['tag']; endif; ?>
+        <h1>Отметьте галочкой станции, на которых планируете разместить рекламу</h1>
+<?php
 foreach ($sat_inf as $satk=>$satc):
     $satusk=$satc['us_id'];
 ?>
@@ -204,7 +207,19 @@ foreach ($sat_inf as $satk=>$satc):
     </div></div>
 <?php endforeach; ?>
     <button name="zaj_stek" type="submit" value="1" >Перейти к планированию</button>
+    
     </form>
+    <?php 
+    
+if(isset($_POST['tags'])): ?>
+<a href="/cabinet/clientrcab/"> к полному списку радиостанций</a>
+<?php endif; else:    ?>
+<div style="text-align: center;"><mark><h2>По Вашему запросу ничего не найдено, 
+            <a href="/cabinet/clientrcab/3"> вернуться к списку радиостанций</a></h2></mark>
+    <image src="/views/img/kotenok.png" />   
+        </div>
+    <?php
+endif; ?>
 </div>
     
     
@@ -322,5 +337,5 @@ foreach ($sat_inf as $satk=>$satc):
 </div>
 </div>
 
-<?php // endif; ?>
+
 </body>
