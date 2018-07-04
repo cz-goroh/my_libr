@@ -23,7 +23,11 @@ if(isset($_POST['change_pass'])){
 if(isset($_POST['plat'])){
     $id_sh=$post['plat'];
     $d_way=ROOT.'/doc/plat_'.$id_sh.'.pdf';
-    move_uploaded_file($_FILES["plat_$id_sh"]['tmp_name'], $d_way);
+    $tmp_nm='plat_'.$id_sh;
+  
+    move_uploaded_file($_FILES["$tmp_nm"]['tmp_name'], $d_way);
+//    var_dump($mv);
+//    print_r($_FILES);
     header('Location: /cabinet/clientrcab/1');
 }
 
@@ -99,7 +103,7 @@ if(isset($_POST['rolik_upd'])){
 }
 
 if(isset($_POST['bid'])){
-//    $radio_id=$post['bid'];
+    $header_w=$post['bid'];
     unset($post['bid']);
     $t= time();
     foreach ($post as $ts_k=>$b_time){
@@ -124,7 +128,11 @@ if(isset($_POST['bid'])){
         Dbq::InsDb($bidq);
         }
     }
-    header('Location: /cabinet/clientrcab/3');
+    if($header_w==='planstack'){
+        header('Location: /cabinet/clientrcab/planstack');
+    }else{
+        header('Location: /cabinet/clientrcab/3');
+    }
 }
 if(isset($_POST['profile_ch'])&&($_POST['profile_ch']===$id)){
     $name=$post['name'];
@@ -165,4 +173,4 @@ if(isset($_POST['rekv_ch'])){
     header('Location: /cabinet/clientrcab/5');
 }
 //`rekv`='$reks',
-header('Location: /cabinet/clientrcab');
+//header('Location: /cabinet/clientrcab');
