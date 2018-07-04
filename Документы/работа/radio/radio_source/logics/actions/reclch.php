@@ -1,6 +1,7 @@
 <?php
 
 if(isset($_POST['zaj_stek'])){
+    $rad_stak_arr=$post;
     
 }
 
