@@ -3,13 +3,13 @@
     <div class="sidebar">
         <!--id="hidden_panel" -->
         
-        <p class="a_style"  id="a4"><br>Профиль</p>
-        <p class="a_style"  id="a5"><br>Реквизиты</p>
+        <p class="a_style"  id="a4"><br> Профиль</p>
+        <p class="a_style"  id="a5"><br> Реквизиты</p>
         <p class="a_style"  id="a1"><br> Счета</p>
         <p class="a_style"  id="a2"><br> Ролики</p>
         <p class="a_style"  id="a3"><br> Радиостанции</p>
-        <p class="a_style"  id="a6"><br> Мои заявки </p>
-        <p class="a_style"  id="a7"><br> Настройки </p>
+        <p class="a_style"  id="a6"><br> Мои заявки</p>
+        <p class="a_style"  id="a7"><br> Настройки</p>
         
     </div>
     <div id="main-div" class="content" ></div>
@@ -57,6 +57,19 @@
     <!--<div class="spoiler-head"></div>-->
     <h4>Счета</h4>
     <?php 
+    if(!empty($sh_ind[$id])): ?>
+    <h1>Новые счета</h1>
+    <?php foreach ($sat_inf as $id_rch=> $radio_i):
+     if(!empty($sh_ind[$id][$id_rch])): ?>
+    <p> От радиостанции <?php echo $radio_i['st_nm']; ?>
+        <a href="/cabinet/dnld/shcet_<?php echo $id_rch.'_'.$id; ?>" 
+           target="_blank" id="sh_dnld<?php echo $id_rch; ?>">
+            Скачать счёт</a></p>
+        <script>
+            $(document).ready(function(){
+                $('sh_dnld<?php echo $id_rch; ?>').click(function(){
+                    $('sh_dnld<?php echo $id_rch; ?>').hide(); }); });
+        </script>  <?php endif;endforeach;endif;
     if(!empty($shcarr)):
     foreach ($shcarr as $shc): 
         $sh_arr= unserialize($shc['sh_ser']);
@@ -157,6 +170,7 @@ foreach ($rolar as $rolkey=>$rolinf):
     <button name="rolik_upl" type="submit" value="rolik" >Загрузить</button>
 </form></div>
 <div id="d-3" >
+    <h1>Радиостанции</h1>
     <form method="post" action="#" >
         <input type="search" name="tag" placeholder="Аудитория" >
         <button name="tags" value="t" type="submit" >Искать</button>
@@ -164,7 +178,7 @@ foreach ($rolar as $rolkey=>$rolinf):
 <?php
 if(isset($_POST['tags'])): echo 'Выборка по запросу '.$post['tag']; endif;?>
     <h1>Отметьте галочкой станции, на которых планируете разместить рекламу</h1>
-    <form method="post" action="/cabinet/clientrcab/plan">
+    <form method="post" action="/cabinet/reclch">
 <?php
 //include ROOT.'/views/rekl/rekl_plan.php'; //вставка плана-заявки
 foreach ($sat_inf as $satk=>$satc):
@@ -174,7 +188,7 @@ foreach ($sat_inf as $satk=>$satc):
 <a onclick="$('#sat<?php echo $satk; ?>').slideToggle('slow');"
            href="javascript://">
               <?php echo $satc['st_nm']; ?> </a> 
-       <a href="#" >Медиаплан</a>
+       <a href="/cabinet/clientrcab/media_<?php echo $satk; ?>" >Медиаплан</a>
     <div id="sat<?php echo $satk; ?>" style="display: none;">
         <?php // print_r($satuser); ?>
         <br>E-mail                             <?php echo $satuser[$satusk]['login']; ?>

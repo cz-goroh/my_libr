@@ -162,14 +162,15 @@ $post= Secure::PostText($_POST);
             if($arg!='plan'){
             $sation_id=$sationinf['id'];
             $sat_inf[$sation_id]=$sationinf;
-        }elseif ($arg==='plan'&& !empty ($_POST['zaj_stek'])) {
-            unset($post['zaj_stek']);
-            
-                    if(in_array($sationinf['id'], $post)){
-                        $sation_id=$sationinf['id'];
-                        $sat_inf[$sation_id]=$sationinf;
-                    }
         }
+//        elseif ($arg==='plan'&& !empty ($_POST['zaj_stek'])) {  //первый вариант планирования нескольких станций
+//            unset($post['zaj_stek']);
+//            
+//                    if(in_array($sationinf['id'], $post)){
+//                        $sation_id=$sationinf['id'];
+//                        $sat_inf[$sation_id]=$sationinf;
+//                    }
+//        }
         }
         
         $rolikq="SELECT * FROM rolik WHERE `rekl_id`=$id";

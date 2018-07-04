@@ -1,5 +1,8 @@
 <?php
 
+if(isset($_POST['zaj_stek'])){
+    
+}
 
 if(isset($_POST['change_pass'])){
     $hashpass= Dbq::AtomSel('pass', 'users', 'id', $usid);
