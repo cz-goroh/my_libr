@@ -78,8 +78,55 @@ $t_hours=[1 =>21600,2 =>25200,3 =>28800,4 =>32400,5 =>36000,6 =>39600,7 =>43200,
     24=>18000    ];
 $t= time();
 $post= Secure::PostText($_POST);
+
+
+//===========================администратор======================================
+if($_SESSION['rol']==='adm'){
+        
+    $r_strq="SELECT * FROM struct WHERE `pr_status`='cur'";
+        $ar_str= Dbq::SelDb($r_strq);              // массив из таблицы структуры
+        foreach ($ar_str as $r){
+            $wday=$r['week_d'];
+            $tm_per=$r['time_p'];
+            $timekey=$wday.'%'.$tm_per;
+            $aar_str["$timekey"]=$r;
+        }
+    $bidq="SELECT * FROM bid ";
+        $abidar= Dbq::SelDb($bidq);//заявки
+        
+        $allbidq="SELECT * FROM bid WHERE `status`!='compl' AND `status`!='cans'";
+        $aallbid=Dbq::SelDb($allbidq);
+        
+        $d_arr= include ROOT.'/config/t_arr.php';//временные позиции
+        $w_arr=[1,2,3,4,5,6,7];                  //дни недели
+        
+        $loyq="SELECT * FROM loy ";
+        $aloyar= Dbq::SelDb($loyq);
+        
+        $shq="SELECT * FROM shcet";
+        $ashcarr= Dbq::SelDb($shq);
+        
+        $satusq="SELECT * FROM users";
+        $asuar= Dbq::SelDb($satusq);
+        
+        $alrolq="SELECT * FROM rolik";
+        $aalrol= Dbq::SelDb($alrolq);
+        foreach ($aalrol as $rolk=>$alrolinf){
+            $iddlit=$alrolinf['id'];
+            $arol_dlit[$iddlit]=$alrolinf['dlit'];//       idролика=>длительность
+        }
+        $r_maninfq="SELECT * FROM sation";
+        $ar_maninf= Dbq::SelDb($r_maninfq);// массив станций
+        
+        foreach ($ar_maninf as $sationinf){
+            $sation_id=$sationinf['id'];
+            $asat_inf[$sation_id]=$sationinf;
+        }
+        $reklq="SELECT * FROM rekl ";
+        $arekl_inf= Dbq::SelDb($reklq);//
+}    
 //======================менеджер радио==========================================
-    if($_SESSION['rol']==='r_man'){
+if($_SESSION['rol']==='r_man'){
             
         $r_maninfq="SELECT * FROM sation WHERE `id`='$id'";
         $r_maninf= Dbq::SelDb($r_maninfq);
@@ -113,12 +160,18 @@ $post= Secure::PostText($_POST);
         $bidatq="SELECT * FROM bid WHERE `radio_id`=$id AND `status`='rec' "
                 . "AND `ins_time`<$tw";
         $bidatar= Dbq::SelDb($bidq);//заявки
+        
+        $reklq="SELECT * FROM rekl";
+        $rekl_inf= Dbq::SelDb($reklq);//
     }
     
 //======================рекламодатель===========================================
         //echo $id;
     if($_SESSION['rol']==='client'){
         
+        
+        
+       
         if(!empty($_POST['plan_sl'])){
             $plan_sl=$post['plan_sl'];
             $plan_per=$post['plan_per'];
@@ -147,6 +200,13 @@ $post= Secure::PostText($_POST);
         
         $reklq="SELECT * FROM rekl WHERE `id`='$id'";
         $rekl_inf= Dbq::SelDb($reklq);//
+        if(!empty($rekl_inf[0]['sett'])){//настройки
+            $setser=$rekl_inf[0]['sett'];
+            $settings= unserialize($setser);
+            if($settings['ist']!='yes'){
+                $t_month= array_slice($t_month, 7);
+            }
+        }
         
         if(isset($_POST['tags'])){                              //поиск по тегам
             $p= Secure::PostText($_POST)['tag'];
