@@ -98,7 +98,6 @@ foreach ($rolar as $rolkey=>$rolinf):
 <!--<span id="testt"></span>-->
 </form>
     </div>
-    
     <div id="d-3">
         <h1>Рекламодатели</h1>
     <?php foreach ($rekl_inf as $rekk=>$rekl): 
@@ -110,12 +109,28 @@ foreach ($rolar as $rolkey=>$rolinf):
     <p>
     <mark><?php echo $rekl['id']; ?></mark>
     <?php echo $rekv['fname']; ?>
-    <a href="/cabinet/admincab/reklcab_<?php echo $rekl['id']; ?>">Обзор</a>
+    ИНН <?php echo $rekv['inn']; ?>
+    <a href="/cabinet/admincab/rekl_cab_<?php echo $rekl['id']; ?>">Обзор</a>
     </p>
     <?php endforeach; ?>
     </div>
     
-    <div id="d-4">Станции</div>
+    <div id="d-4">
+        <h1>Станции</h1>
+        <?php foreach ($r_maninf as $rekk=>$radio): 
+    if(!empty($radio['rekv'])):
+        $rekstr=$radio['rekv'];
+        $rekvr= unserialize($rekstr);
+    endif;
+    ?>
+    <p>
+    <mark><?php echo $radio['id']; ?></mark>
+    <?php echo $rekvr['fname']; ?>
+    ИНН <?php echo $rekvr['inn']; ?>
+    <a href="/cabinet/admincab/rman_cab_<?php echo $radio['id']; ?>">Обзор</a>
+    </p>
+    <?php endforeach; ?>
+    </div>
     
     <div id="d-5">
         <h1>Заявки</h1>
