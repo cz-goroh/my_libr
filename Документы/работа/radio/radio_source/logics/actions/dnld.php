@@ -1,5 +1,31 @@
 <?php
 $exarg=explode('_', $arg);
+
+if($exarg[0]==='reklmedia'){
+//    echo 'reklmedia';
+    $mediakey=$exarg[1];
+    $mediaar=$r_str[$mediakey];
+    unset($r_str);
+    $r_str[$mediakey]=$mediaar;//оставляем в массиве только один элемент
+    
+    ob_start();
+    include ROOT.'/views/blanc/rekl_media.php';
+    $html=ob_get_contents();
+    ob_end_clean();
+    
+//    error_reporting (E_ERROR);
+        $mpdf = new mPDF('utf-8', 'A4-L', 8, '', 10, 10, 7, 7, 10, 10); /*задаем формат, отступы и.т.д.*/
+        $stylesheet = file_get_contents(ROOT.'/style.css'); /*подключаем css*/
+        $mpdf->WriteHTML($stylesheet, 1);
+        $mpdf->list_indent_first_level = 0; 
+        $mpdf->WriteHTML($html, 2); /*формируем pdf*/
+        $fw='mediaplan_'.$mediakey.'.pdf';
+        $mpdf->Output($fw, 'I');
+        
+        ini_set('display_errors',1);
+        error_reporting(E_ALL);
+}
+
 if($exarg[0]==='rolik'){
     $rolik_id=$exarg[1];
     $file=ROOT.'/audio/rolik_'.$rolik_id.'.mp3';
