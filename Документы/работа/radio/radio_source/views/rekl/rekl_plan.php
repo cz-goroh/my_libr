@@ -120,8 +120,11 @@ foreach ($t_month as $mon_k=>$mon_t): ?>
                 <?php echo $strinf['aud_reach']; ?>  
             </div>
             <!-- БУЛИТЫЫЫЫЫЫЫЫЫ -->
+            <?php if(!empty($settings['bol'])&&$settings['bol']==='yes'):?>
             <div class="quest" id="qst<?php echo $timestamp.'_'.$id_r; ?>">?</div>
+            <?php endif; ?>
             <div class="price_str"> <?php echo $strinf['price']; ?>р</div>
+            <?php if(!empty($settings['bol'])&&$settings['bol']==='yes'):?>
             <div class="boolit" id="bl<?php echo $timestamp.'_'.$id_r; ?>">
                 а вот и булит, только пока неясно, <br>какую инфу туда запихнуть- можно для каждой ячейки<br> свою, да и свойства менять пожалуйста
             </div>
@@ -136,12 +139,14 @@ foreach ($t_month as $mon_k=>$mon_t): ?>
                         $('#bl<?php echo $timestamp.'_'.$id_r; ?>').show(); });
                     $('#qst<?php echo $timestamp.'_'.$id_r; ?>').mouseout(function(){
                         $('#bl<?php echo $timestamp.'_'.$id_r; ?>').hide(); }); }); </script>
+            <?php endif; ?>
         <?php
         $time_fil=0;          //время заявок текущего рекламодателя в промежутке
         
         
         if(isset($sbidar[$timestamp])&&!empty($sbidar[$timestamp])):
         foreach ($sbidar[$timestamp] as $bidk=>$bid)://выясняем есть ли заявка на это время  (56448ит)
+           
             $r_id =(int)$bid['radio_id']   ;// 
             $id_r =(int)$strinf['id_radio'];
             $t_st =(int)$timestamp         ;
@@ -249,10 +254,11 @@ if($bid['status']==='payd'): ?>
 if($bid['status']==='compl'): ?>
                 <div class="stat-mark" style="background-color: #E7262B;"  >
                <?php echo $bid['id']; ?>On air</div>
-            <?php endif; endif; 
+            <?php endif; endif;
+            endforeach;
             
-            endforeach; 
-        endif;
+            endif;
+            
             if($time_fil>0):  ?>
                 <div class="stat-mark" style="background-color: #845574;" >Total
                 <?php echo $time_fil; ?></div> 
@@ -298,18 +304,15 @@ if($bid['status']==='compl'): ?>
 
                 
 </div></div><?php endforeach;?>
+         <?php if(!empty($expl_arg[0])&& $expl_arg[0]==='planstack') : ?>
     <button type="submit" name="bid" 
-                    value="<?php echo $rinf["$rmk"]['id_radio']; ?>" >
-            Отправить заявки на выбранные радиостанции! </button>
+                    value="planstack" >
+            Отправить заявку и перейти к следующей станции! </button>
+        <?php else: ?>
+            <button type="submit" name="bid" 
+                    value="single" >
+            Отправить заявку ! </button>
+        <?php endif; ?>
     </form>
     
-    <?php 
-if(isset($_POST['tags'])): ?>
-<a href="/cabinet/clientrcab/"> к полному списку радиостанций</a>
-<?php endif; else:    ?>
-<div style="text-align: center;"><mark><h2>По Вашему запросу ничего не найдено, 
-            <a href="/cabinet/clientrcab/"> вернуться к списку радиостанций</a></h2></mark>
-    <image src="/views/img/kotenok.png" />   
-        </div>
-    <?php
-endif;
+    <?php  endif;
