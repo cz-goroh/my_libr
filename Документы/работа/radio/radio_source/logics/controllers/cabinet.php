@@ -84,46 +84,53 @@ $post= Secure::PostText($_POST);
 if($_SESSION['rol']==='adm'){
         
     $r_strq="SELECT * FROM struct WHERE `pr_status`='cur'";
-        $ar_str= Dbq::SelDb($r_strq);              // массив из таблицы структуры
-        foreach ($ar_str as $r){
+        $r_str= Dbq::SelDb($r_strq);              // массив из таблицы структуры
+        foreach ($r_str as $r){
             $wday=$r['week_d'];
             $tm_per=$r['time_p'];
             $timekey=$wday.'%'.$tm_per;
-            $aar_str["$timekey"]=$r;
+            $ar_str["$timekey"]=$r;
         }
     $bidq="SELECT * FROM bid ";
-        $abidar= Dbq::SelDb($bidq);//заявки
+        $bidar= Dbq::SelDb($bidq);//заявки
         
         $allbidq="SELECT * FROM bid WHERE `status`!='compl' AND `status`!='cans'";
-        $aallbid=Dbq::SelDb($allbidq);
+        $allbid=Dbq::SelDb($allbidq);
         
         $d_arr= include ROOT.'/config/t_arr.php';//временные позиции
         $w_arr=[1,2,3,4,5,6,7];                  //дни недели
         
         $loyq="SELECT * FROM loy ";
-        $aloyar= Dbq::SelDb($loyq);
+        $loyar= Dbq::SelDb($loyq);
         
-        $shq="SELECT * FROM shcet";
-        $ashcarr= Dbq::SelDb($shq);
+        $shq="SELECT * FROM shcet ";
+        $shcarr= Dbq::SelDb($shq);
         
         $satusq="SELECT * FROM users";
-        $asuar= Dbq::SelDb($satusq);
+        $suar= Dbq::SelDb($satusq);
         
         $alrolq="SELECT * FROM rolik";
-        $aalrol= Dbq::SelDb($alrolq);
-        foreach ($aalrol as $rolk=>$alrolinf){
+        $alrol= Dbq::SelDb($alrolq);
+        foreach ($alrol as $rolk=>$alrolinf){
             $iddlit=$alrolinf['id'];
-            $arol_dlit[$iddlit]=$alrolinf['dlit'];//       idролика=>длительность
+            $rol_dlit[$iddlit]=$alrolinf['dlit'];//       idролика=>длительность
         }
         $r_maninfq="SELECT * FROM sation";
-        $ar_maninf= Dbq::SelDb($r_maninfq);// массив станций
+        $r_maninf= Dbq::SelDb($r_maninfq);// массив станций
         
-        foreach ($ar_maninf as $sationinf){
+        foreach ($r_maninf as $sationinf){
             $sation_id=$sationinf['id'];
-            $asat_inf[$sation_id]=$sationinf;
+            $sat_inf[$sation_id]=$sationinf;
         }
         $reklq="SELECT * FROM rekl ";
-        $arekl_inf= Dbq::SelDb($reklq);//
+        $rekl_inf= Dbq::SelDb($reklq);//
+        
+        $rolikq="SELECT * FROM rolik ";
+        $rolar= Dbq::SelDb($rolikq);//массив роликов
+        foreach ($rolar as $rol_key=>$rol_inf){
+            $rolid=$rol_inf['id'];
+            $rolsort[$rolid]=$rol_inf['dlit'];
+        }
 }    
 //======================менеджер радио==========================================
 if($_SESSION['rol']==='r_man'){
