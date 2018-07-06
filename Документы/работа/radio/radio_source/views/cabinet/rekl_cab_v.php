@@ -15,7 +15,21 @@
     <div id="main-div" class="content" ></div>
 </div>
 <div id="content">
+<div id="d-7">
+    <h1>Настройки</h1>
+    <form method="post" action="/cabinet/reclch">
+    <p><span class="prof_nam">Показывать недельную историю в медиаплане</span>
+        <input name="ist" type="checkbox"
+ <?php if(!empty($settings['ist'])&&$settings['ist']==='yes'){ echo 'checked';} ?> 
+               value="yes" /> </p>
     
+    <p><span class="prof_nam">Показывать всплывающие подсказки в медиаплане</span>
+        <input name="bol" type="checkbox"
+             <?php if(!empty($settings['bol'])&&$settings['bol']==='yes'){ echo 'checked';} ?>
+               value="yes" /> </p>
+    <button name="settings" type="submit" value="1">Обновить</button>
+    </form>
+</div>
 <div id="d-6"> 
 
     <h1>Мои заявки</h1>
@@ -191,7 +205,11 @@ foreach ($sat_inf as $satk=>$satc):
 <a onclick="$('#sat<?php echo $satk; ?>').slideToggle('slow');"
            href="javascript://">
               <?php echo $satc['st_nm']; ?> </a> 
-       <a href="/cabinet/clientrcab/media_<?php echo $satk; ?>" >Медиаплан</a>
+       <a href="/cabinet/clientrcab/media_<?php echo $satk; ?>" >Открыть Медиаплан</a>
+       
+       <a href="/cabinet/dnld/reklmedia_<?php echo $satk; ?>" 
+           target="_blank" id="rekl_media<?php echo $satk; ?>">
+            Скачать Медиаплан</a>
     <div id="sat<?php echo $satk; ?>" style="display: none;">
         <?php // print_r($satuser); ?>
         <br>E-mail                             <?php echo $satuser[$satusk]['login']; ?>
