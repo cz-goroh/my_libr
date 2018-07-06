@@ -10,12 +10,48 @@ include_once  ROOT.'/views/header.php';
         <p class="a_style"  id="a1"><br> Счета</p>
         <p class="a_style"  id="a2"><br> Ролики</p>
         <p class="a_style"  id="a3"><br> Рекламодатели</p>
+        <p class="a_style"  id="a5"><br> Настройки</p>
         
         
     </div>
     <div id="main-div" class="content" ></div>
 </div>
 <div id="content">
+    <div id="d-5">
+        <h4>Смена пароля</h4>
+    Введите текущий пароль
+    <input name="curr_pass" id="curr_pass" type="password" class="left-30"/>
+    <br>Введите новый пароль
+    <input name="new_pass" id="new_pass" type="password" class="left-30"/>
+    <br>Повторите новый пароль
+    <input name="new_reppass" id="new_reppass" type="password" class="left-30"/>
+    <br><button name="change_pass" value="1" type="button" id="change_pass">
+        Отправить</button><span id="res_pass" ></span>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#change_pass').click(function(){
+            var curr_pass=$('#curr_pass').val();
+            var new_pass=$('#new_pass').val();
+            var new_reppass=$('#new_reppass').val();
+                $.ajax({
+                type: "POST",
+                url: "/cabinet/adminch",
+                data: { 
+                    curr_pass:   curr_pass ,
+                    new_pass:    new_pass,
+                    new_reppass: new_reppass,
+                    change_pass: 1
+                },
+                beforeSend: function() { 
+            $('#change_pass').attr('disabled',true);
+            $('#change_pass').html('Отправляем');
+        },
+                success: function(html){           
+                    var inr=html;
+                    $('#res_pass').html(inr);
+                    ('#change_pass').attr('disabled',false);
+                } }); return false;    }); });</script>
+    </div>
     <div id="d-1"><h1>Счета</h1>
     <?php
     if(!empty($shcarr)):
