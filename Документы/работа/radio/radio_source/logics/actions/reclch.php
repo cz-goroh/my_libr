@@ -1,5 +1,18 @@
 <?php
 
+if(isset($_POST['settings'])){
+    $ist=$post['ist'];
+    $bol=$post['bol'];
+    $sersett= Dbq::AtomSel('sett', 'rekl', 'id', $id);
+    $set= unserialize($sersett);
+    $set['ist']=$ist;
+    $set['bol']=$bol;
+    $sersett= serialize($set);
+    $upsq="UPDATE rekl SET `sett`='$sersett' WHERE `id`=$id";
+    Dbq::InsDb($upsq);
+    header('Location: /cabinet/clientrcab/7');
+}
+
 if(isset($_POST['zaj_stek'])){
     unset($post['zaj_stek']);
     $rad_stack_arr=$post;
