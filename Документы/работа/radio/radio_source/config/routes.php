@@ -5,8 +5,9 @@ return array (
               'signup'=>'registration/logout',
     
               'cabinet'=>'loycab/r_mancab/clientrcab/rmanch/reclch/clientrcab/'
-            . 'loych/dnld/shcet',
+            . 'loych/dnld/shcet/admincab/adminch',
               
-              'out' =>'file'
+              'out' =>'file',
+              'test'=>'test'
     
 );
