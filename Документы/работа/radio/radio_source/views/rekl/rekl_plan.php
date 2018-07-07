@@ -74,20 +74,21 @@ endforeach;
         </script>  <?php endif; ?>
     </div>
     <div id="one<?php echo $id_r; ?>"  >
-        <div style="width: 100%; height: 600px; overflow-y: auto;
-             overflow-x: auto;">        
+      <!--  <div style="width: 100%; height: 600px; overflow-y: auto;
+             overflow-x: auto;">  -->      
     
-<table border="1" border-collapsing="collapse"
-       cellpadding="2" cellspacing="0"  >
+      <table  border-collapsing="collapse" id="t1" >
     <thead >
     <tr>
-        <th>Время</th>
+        <th><div class="in_tab">Время</div></th>
 <?php 
 if(isset($plan_sl)&&!empty($plan_sl)):
     $t_month= array_slice($t_month, 0, $plan_per, TRUE);
 endif;
 foreach ($t_month as $mon_k=>$mon_t): ?>
-    <th><?php echo $rus_week[date('N', $mon_t)].'<br>'.date('d m',$mon_t); ?></th>
+        <th><div class="in_tab">
+            <?php echo $rus_week[date('N', $mon_t)].'<br>'.date('d m',$mon_t); ?>
+            </div></th>
     <?php endforeach; ?>
     </tr>    </thead>
     
@@ -132,10 +133,10 @@ foreach ($t_month as $mon_k=>$mon_t): ?>
                 $(document).ready(function(){
                     $('#bl<?php echo $timestamp.'_'.$id_r; ?>').hide();
                     $('#qst<?php echo $timestamp.'_'.$id_r; ?>').mouseover(function(){
-                        $('#bl<?php echo $timestamp.'_'.$id_r; ?>').css({
-                            "top" : event.pageY+10,
-                            "left" : event.pageX+10
-                        });
+//                        $('#bl<?php// echo $timestamp.'_'.$id_r; ?>').css({
+//                            "top" : event.pageY,
+//                            "left" : event.pageX
+//                        });
                         $('#bl<?php echo $timestamp.'_'.$id_r; ?>').show(); });
                     $('#qst<?php echo $timestamp.'_'.$id_r; ?>').mouseout(function(){
                         $('#bl<?php echo $timestamp.'_'.$id_r; ?>').hide(); }); }); </script>
