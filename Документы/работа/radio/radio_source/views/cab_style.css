@@ -164,14 +164,17 @@ table{
     font-family: HelveticaThin; 
     font-size: 14px; 
     /*table-layout: fixed;*/
-    border: 0.1px solid #CCCCCC;
+    /*border: 0.1px solid #CCCCCC;*/
 }
 th{
     /*height: 80px; width: 80px;*/
-    border-style: solid;}
+    background-color: #EEEEEE;
+    border-style: solid;
+}
 td{
     /*height: 80px; width: 80px;*/
-    border-style: solid; }
+    border-style: solid; 
+}
 input{font-family: HelveticaMedium; }
 button{font-family: HelveticaMedium; }
 select{font-family: HelveticaMedium; }
@@ -288,7 +291,7 @@ img.wp-smiley,
     font-family: HelveticaThin;
     height: 80px;
     width: 80px;
-    overflow-x: auto;
+    /*overflow-x: auto;*/
     overflow-y: auto;
 }
 .aud_reach{
@@ -334,3 +337,30 @@ img.wp-smiley,
 /* ========================================================================== */
 
 
+/*==============================фиксация таблицы==============================ы*/
+
+p {margin:28px 0 3px 0;}
+.divFixHeaderCol {
+  position:relative;
+  border:0;
+  border-left:1px solid #d0d0d0;
+  border-bottom:1px solid #d0d0d0;
+  overflow:hidden;
+}
+.divFixHeaderCol table {border-collapse:collapse;}
+.divFixHeaderCol td {
+  font:400 11px tahoma,arial,sans-serif;
+  padding:2px;
+  border:1px solid #d0d0d0;
+  border-left:0;
+  background:#fff;
+  min-height:14px; /* если высота клиентской части в ячейке меньше 14px, то IE криво отрисовывает горизонтальные линии в фиксированной области */
+  /* Самое интересное, что padding ни на что не влияет. Можно, например, сделать padding=16px и если клиентская высота < 14px, то всё равно IE криво отрисует линии */
+  /* Если padding=0, а клиентская высота >= 14px, то будет нормально, IE ровно отрисует линии */
+}
+.divFixHeaderCol .fixRegion td {
+  background:#fff no-repeat;
+  background-image:linear-gradient(#eee,#eee);
+  background-position:1px 1px;
+}
+.cntr {text-align:center;}
