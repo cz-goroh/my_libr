@@ -118,6 +118,7 @@ if($_SESSION['rol']==='adm'){
         $r_maninfq="SELECT * FROM sation";
         $r_maninf= Dbq::SelDb($r_maninfq);// массив станций
         
+        
         foreach ($r_maninf as $sationinf){
             $sation_id=$sationinf['id'];
             $sat_inf[$sation_id]=$sationinf;
@@ -130,6 +131,22 @@ if($_SESSION['rol']==='adm'){
         foreach ($rolar as $rol_key=>$rol_inf){
             $rolid=$rol_inf['id'];
             $rolsort[$rolid]=$rol_inf['dlit'];
+        }
+        if(isset($_POST['admsearch'])){
+            foreach ($r_maninf as $serch_r){
+                $ser_r_rek=$serch_r['rekv'];
+                $r_rek= unserialize($ser_r_rek);
+                if($r_rek['inn']===$post['inns']){
+                    $search[]=$serch_r;
+                }
+            }
+            foreach ($rekl_inf as $serch_c){
+                $ser_c_rek=$serch_c['rekv'];
+                $c_rek= unserialize($ser_c_rek);
+                if($c_rek['inn']===$post['inns']){
+                    $search[]=$serch_c;
+                }
+            }
         }
 }    
 //======================менеджер радио==========================================
