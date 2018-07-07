@@ -1,4 +1,4 @@
-
+<p><a href="/cabinet/admincab/">Обратно в кабинет</a></p>
 <div class="layout">
     <div class="sidebar">
         <p class="a_style"  id="a4"><br> Профиль</p>
