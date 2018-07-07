@@ -130,19 +130,19 @@ $sl=Rman::MarkSort($r_str);
 <!--=======================================МЕДИАПЛАН=========================-->
 <h4>Медиаплан </h4>
 <!--<button onclick="FixAction(this)">Зафиксировать</button>-->
-<!-- <div style="width: 100%; height: 800px; overflow-y: auto;
+ <!-- <div style="width: 100%; height: 800px; overflow-y: auto;
              overflow-x: auto;"> -->
         
 <form action="/cabinet/rmanch/" method="post" >
-    <table border="1" border-collapsing="collapse" cellpadding="2" cellspacing="0" id="t1">
+    <table  border-collapsing="collapse"  id="t1">
     <thead>
     <tr>
-    <th></th>
+        <th><div class="in_tab">Время</div></th>
     <?php foreach ($t_month as $mon_k=>$mon_t): ?>
-    <th><?php echo $rus_week[date('N', $mon_t)].'<br>'.date('d m',$mon_t); ?></th>
+        <th><div class="in_tab"><?php echo $rus_week[date('N', $mon_t)].'<br>'.date('d m',$mon_t); ?></div></th>
     <?php endforeach; ?>
-    <th>Всего <br>сек</th>
-    <th>Общая<br> стоимость</th>
+        <th><div class="in_tab">Всего <br>сек</div></th>
+        <th><div class="in_tab">Общая<br> стоимость</div></th>
     </tr>
     </thead>
     <tbody>
