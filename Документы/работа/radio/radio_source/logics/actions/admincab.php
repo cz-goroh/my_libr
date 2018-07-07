@@ -173,5 +173,8 @@ if(empty($arg)){
             include_once  ROOT.'/views/header.php';
             include ROOT.'/views/cabinet/radioobzor.php';
         }
+    }if($exarg[0]==='search'){
+        include_once  ROOT.'/views/header.php';
+        include ROOT.'/views/cabinet/adminsearch.php';
     }
 }
