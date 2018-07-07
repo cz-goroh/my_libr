@@ -1,3 +1,4 @@
+<p><a href="/cabinet/admincab/">Обратно в кабинет</a></p>
 <?php
 //print_r($_SESSION);
 if(empty($r_str)){
@@ -18,12 +19,12 @@ include_once ROOT.'/views/header.php';
  <?php else: ?><p><?php  echo 'Логотип не загружен'; ?> </p><?php  endif;?>
         </p>
         <p class="a_style"  id="a7"><br>Профиль радиостанции</p>
-        <p class="a_style"  id="a4" ><br>Реквизиты</p>
-        <p class="a_style"  id="a1"><br> Счета</p>
-        <p class="a_style"  id="a2"><br> Юристы</p>
-        <p class="a_style"  id="a5" ><br>Пики слушания</p>
-        <p class="a_style"  id="a6"><br> Цены</p>
-        <p class="a_style"  id="a3"><br> Медиаплан</p>
+        <p class="a_style"  id="a4"><br>Реквизиты</p>
+        <p class="a_style"  id="a1"><br>Счета</p>
+        <p class="a_style"  id="a2"><br>Юристы</p>
+        <p class="a_style"  id="a5"><br>Пики слушания</p>
+        <p class="a_style"  id="a6"><br>Цены</p>
+        <p class="a_style"  id="a3"><br>Медиаплан</p>
     </div>
 
     <div id="main-div" class="content"></div>
