@@ -129,14 +129,15 @@ $sl=Rman::MarkSort($r_str);
     
 <!--=======================================МЕДИАПЛАН=========================-->
 <h4>Медиаплан </h4>
-<div style="width: 100%; height: 800px; overflow-y: auto;
-             overflow-x: auto;">
+<!--<button onclick="FixAction(this)">Зафиксировать</button>-->
+<!-- <div style="width: 100%; height: 800px; overflow-y: auto;
+             overflow-x: auto;"> -->
         
 <form action="/cabinet/rmanch/" method="post" >
-<table border="1" border-collapsing="collapse" cellpadding="2" cellspacing="0">
+    <table border="1" border-collapsing="collapse" cellpadding="2" cellspacing="0" id="t1">
     <thead>
     <tr>
-    <th>Время</th>
+    <th></th>
     <?php foreach ($t_month as $mon_k=>$mon_t): ?>
     <th><?php echo $rus_week[date('N', $mon_t)].'<br>'.date('d m',$mon_t); ?></th>
     <?php endforeach; ?>
