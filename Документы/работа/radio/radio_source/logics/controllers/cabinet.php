@@ -137,14 +137,14 @@ if($_SESSION['rol']==='adm'){
                 $ser_r_rek=$serch_r['rekv'];
                 $r_rek= unserialize($ser_r_rek);
                 if($r_rek['inn']===$post['inns']){
-                    $search[]=$serch_r;
+                    $search_r[]=$serch_r;
                 }
             }
             foreach ($rekl_inf as $serch_c){
                 $ser_c_rek=$serch_c['rekv'];
                 $c_rek= unserialize($ser_c_rek);
                 if($c_rek['inn']===$post['inns']){
-                    $search[]=$serch_c;
+                    $search_c[]=$serch_c;
                 }
             }
         }
