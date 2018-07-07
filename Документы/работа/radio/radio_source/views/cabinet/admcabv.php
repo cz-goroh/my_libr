@@ -1,11 +1,15 @@
 <?php
-//echo User::wiyn()['namestr'];
 include_once  ROOT.'/views/header.php';
 ?>
 <div class="layout">
     <div class="sidebar">
         <!--id="hidden_panel" -->
-        
+        <p class="a_style">
+        <form method="post" action="/cabinet/admincab/search" >
+            <input type="search" name="inns" placeholder="ИНН" />
+            <button name="admsearch" type="submit" value="1" >&#128270</button>
+        </form>
+        </p>
         <p class="a_style"  id="a4"><br> Станции</p>
         <p class="a_style"  id="a1"><br> Счета</p>
         <p class="a_style"  id="a2"><br> Ролики</p>
@@ -18,6 +22,7 @@ include_once  ROOT.'/views/header.php';
 </div>
 <div id="content">
     <div id="d-5">
+        
         <h4>Смена пароля</h4>
     Введите текущий пароль
     <input name="curr_pass" id="curr_pass" type="password" class="left-30"/>
